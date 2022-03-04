@@ -5,7 +5,7 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
-with open("/home/flyingspark/Downloads/freelnacer-linkedin/linkedin", 'r') as myfile:
+with open("../linkedin-04-2022", 'r') as myfile:
     data=myfile.read()
 data=json.loads(data) 
 channel.basic_publish(exchange='', routing_key='hello', body=json.dumps(data))
