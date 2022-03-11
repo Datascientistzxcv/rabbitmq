@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from bson.objectid import ObjectId
 
 
 class Dbconnect():
@@ -26,4 +27,7 @@ class Dbconnect():
 
     def get_freelance_data(self,_id):
         print("db.py",_id)
-        return list(self.mongo_client.assignments.freelance.find({"candidate_id":_id}))
+        return list(self.mongo_client.assignments.FreelanceMap.find({"_id":ObjectId(_id)}))
+    def update_freelanceMap(self,_id,linkedinURL):
+        print(linkedinURL)
+        self.mongo_client.assignments.FreelanceMap.update_one({"_id":ObjectId(_id)}, {'$set': {'linkedin_url':linkedinURL}})
